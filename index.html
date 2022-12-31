@@ -1,15 +1,30 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="0; url=https://praveenvnktsh.github.io/Home.html">
-        <script type="text/javascript">
-            window.location.href = "https://praveenvnktsh.github.io/Home.html"
-        </script>
-        <title>Page Redirection</title>
-    </head>
-    <body>
-        <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
-        If you are not redirected automatically, follow this <a href='https://praveenvnktsh.github.io/Home.html'>link to example</a>.
-    </body>
-</html>
+---
+layout: default
+logo: '/images/Logo.png'
+title: Praveen Venkatesh
+tagline: Praveen's personal website
+author:
+    name: Praveen Venkatesh
+carousels:
+  - images: 
+    - image: ../images/medals_1.jpg
+      desc: Convocation | Receiving medals from Dr. Krishnaswamy VijayRaghavan
+    - image: ../images/deanslist.jpg
+      desc: Receiving Dean's List from Prof Atul
+    - image: ../images/aml_2.jpg
+      desc: With "Moon man" Dr J.N. Goswami @ Amalthea '18
+    - image: ../images/iitroorkee.jpg
+      desc: Inter IIT Bhubaneswar vs IIT Roorkee team
+    - image: ../images/invent.jpg
+      desc: Invent@IITGN 2019
+    - image: ../images/latex.jpg
+      desc: Team LaTeX 2018
+---
+
+{% include section-hero.html %}
+
+{% include section-about.html %}
+
+{% include section-projects.html %}
+
+<!-- {% include section-blog.html %} -->

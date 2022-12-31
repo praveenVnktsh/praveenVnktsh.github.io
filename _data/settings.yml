@@ -1,0 +1,189 @@
+#-------------------------------
+# Site Settings
+title: Praveen Venkatesh
+logo: '/images/Logo.png'
+description: Praveen's personal website.
+color_scheme: auto # You can choose three modes auto, light, and dark. By default, the auto mode is set, which means the user can choose the light or dark mode themself.
+
+
+#-------------------------------
+# Navigation Settings
+menu__settings:
+  menu__items:
+    - title: 'Home'
+      url: '/'
+    - title: 'Projects'
+      url: '/projects/'
+    # - title: 'Blog'
+    #   url: '/blog/'
+    - title: 'Achievements'
+      url: '/achievements/'
+    - title: 'Research'
+      url: '/research/'
+    - title: 'Non Academic'
+      url: '/nonacademic/'
+    
+    # - title: 'Pages'
+      # submenu:
+      # - url: '/about/'
+    #     title: 'About'
+    #   - url: '/elements/'
+    #     title: 'Elements'
+
+
+#-------------------------------
+# Author Settings
+author:
+  author__name: Praveen Venkatesh
+  author__bio: All the world's a stage, And all the men and women merely players - William Shakespeare. What do I want?  Play the game => win :)
+  author__avatar: '/images/ski.jpg'
+
+social:
+- {icon: "ion-logo-linkedin", link: "https://www.linkedin.com/in/praveenVnktsh/"}
+- {icon: "ion-logo-github", link: "https://github.com/praveenVnktsh"}
+- {icon: "ion-logo-twitter", link: "https://twitter.com/praveenVnktsh"}
+
+# Example of adding a new link to the footer - {icon: "ion-logo-dribbble", link: "https://dribbble.com"}
+# Other icons can be found at https://ionicons.com/v4/
+
+
+#-------------------------------
+# Hero Settings
+hero:
+  hero__title: Praveen Venkatesh
+  hero__description: Hello World! I am a graduate student at Carnegie Mellon University, Robotics Institute. 
+  hero__description_points:
+    - Passionate about giving sight to robots.
+    - Currently building robotic systems that can assist humans
+    - Love tinkering with robots and experimenting with crazy ideas. Check my projects out here Projects 
+    - Absolutely love teaching and disseminating knowledge in intuitive ways - my projects always have a visual component to it :)
+    - Triple Gold Medallist from IIT Gandhinagar
+    
+  hero__image: '/images/ski.jpg'
+
+
+#-------------------------------
+# About me page.
+about:
+  main_content: Some things about me
+  main_content_desc:
+    - I can solve the 3x3 cube in around 13 seconds and can solve 14 different twisty puzzle derivatives of the 3x3 (Including solving it blindfolded!). Check my World Cubing Association profile here - [Praveen Venkatesh | World Cube Association](praveenvnktsh.github.io)
+    - I go on typeracer and have fun when I feel like it. Its how I can type at 100 WPM :P
+    - Music = ❤️
+    - Competitive Table Tennis player (ex-state player from TN) - find a TT board, I'm up for a match anytime!
+    - I can play the Keyboard
+    - I play a lot of games! (gamerTag - flyingMango)
+  
+
+
+
+
+#-------------------------------
+# Newsletter
+mailchimp: #disable # To enable the mailchimp form, use the value 'enable'. To disable the form, leave the field blank.
+mailchimp__identifier: #frnla.us6.list-manage.com/subscribe/post?u=6314d69a3f315af7ce3fb00a0&amp;id=3038727cc3 # Add your MailChimp form identifier. For example - frnla.us6.list-manage.com/subscribe/post?u=6314d69a3f315af7ce3fb00a0&amp;id=3038727cc3
+mailchimp__input__text: Your email address...
+mailchimp__button__text: Get updates
+
+
+#-------------------------------
+# Projects Settings
+projects__settings:
+  projects__title: My Works
+  projects__description: Some uber cool things I've done in the past...
+
+
+#-------------------------------
+# Testimonials Section
+# testimonial__title: #What clients say
+# testimonial__description:
+
+# testimonial__items:
+  # - name: "Aspen Carder"
+  #   image: "/images/client-1.jpg"
+  #   designation: "Lettering Artist"
+  #   link: "https://twitter.com/"
+  #   content : "Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration"
+
+  # - name: "Lydia Siphron"
+  #   image: "/images/client-2.jpg"
+  #   designation: "Designer"
+  #   link: "https://facebook.com/"
+  #   content : "Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration"
+
+  # - name: "Craig Vaccaro"
+  #   image: "/images/client-3.jpg"
+  #   designation: "Web developer"
+  #   link: "https://twitter.com/"
+  #   content : "Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration"
+
+  # - name: "Anika Calzoni"
+  #   image: "/images/client-4.jpg"
+  #   designation: "Lettering Artist"
+  #   link: "https://facebook.com/"
+  #   content : "Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration"
+
+  # - name: "Marcus Botosh"
+  #   image: "/images/client-5.jpg"
+  #   designation: "Full Stack Designer"
+  #   link: "https://twitter.com/"
+  #   content : "Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration"
+
+
+#-------------------------------
+# Blog Section
+blog__settings:
+  blog__title: Recent Posts
+  blog__description:
+
+
+#-------------------------------
+# Gallery Footer Settings
+# gallery:
+#   gallery__images:
+#     - alt: 'Rest'
+#       url: '/images/BlindFaith/BlindFaith.jpg'
+#     - alt: 'Rest'
+#       url: '/images/BlindFaith/BlindFaith1.png'
+#     - alt: 'Rest'
+#       url: '/images/BlindFaith/BlindFaith2.png'
+#     - alt: 'Rest'
+#       url: '/images/BlindFaith/BlindFaith.jpg'
+
+
+#-------------------------------
+# Footer Navigation Settings
+footer_menu__settings:
+  menu__items:
+    - title: 'Home'
+      url: '/'
+    - title: 'Projects'
+      url: '/projects/'
+    - title: 'Blog'
+      url: '/blog/'
+    # - url: '/about/'
+    #   title: 'About'
+    # - title: 'Contact'
+    #   url: '/contact/'
+    # - url: '/elements/'
+    #   title: 'Elements'
+
+
+#-------------------------------
+# Contact Settings
+contact:
+  email: # Add your form_id
+  description: Contact me! # Add a description of your form
+
+# NOTE
+# Hilton theme comes with a contact form built-in. You can use this form with Formspree (https://formspree.io/) service and get up to 50 submissions for free. Also, you can easily switch to another service if you want.
+
+
+#-------------------------------
+# Comment Section (Disqus)
+#disqus-identifier: anvodstudio-demo # Add your shortname for Disqus Comment. For example anvodstudio-demo
+
+
+#-------------------------------
+# Google Analytics
+google-analytics: G-CJSQLNX1D1 # Add your GA Tracking Id

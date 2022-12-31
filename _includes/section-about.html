@@ -1,0 +1,59 @@
+<!-- begin hero -->
+<section>
+
+    <div class="container" style="padding-top:30px;">
+        In my spare time, I engage myself in tinkering with electronics and automating my life. I have always firmly believed
+        that we should strive to be the best version of ourselves, and have transformed significantly as a person during
+        my time at IITGN. I have been part of several student-run groups and developmental projects, and have actively contributed towards improving the sporting and technical
+        culture at the institute.
+    </div>
+    <hr class="rounded">
+    <div class="container" style="padding-top:30px;">
+        <div class="row1">
+            <div class="column1 left">
+                {{ site.data.settings.about.main_content }}
+                <ul style="font-size:16px;">
+                    {% for desc in site.data.settings.about.main_content_desc %}
+                    <li class="">{{ desc }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="column1 right">
+                <div class='row'>
+                    <a class="twitter-timeline" data-width="500" data-height="500"
+                        href="https://twitter.com/praveenvnktsh?ref_src=twsrc%5Etfw">Tweets by praveenvnktsh</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    <!-- <a href="https://data.typeracer.com/pit/profile?user=awesomeroks&ref=badge" target="_top"><img
+                            src="https://data.typeracer.com/misc/badge?user=awesomeroks" border="0"
+                            alt="TypeRacer.com scorecard for user awesomeroks" /></a> -->
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<style>
+    .column1 {
+        float: left;
+        padding-right: 30px;
+    }
+
+    .left {
+        width: 60%;
+    }
+
+    .right {
+        width: 40%;
+    }
+
+    .row1:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+
+<!-- end hero -->
