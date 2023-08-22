@@ -1,8 +1,8 @@
 ---
-title: FoodBuddy 
-subtitle: Assistive Dining Device for the Disabled
-contributors:  Chris Francis* & Praveen Venkatesh*
-date: 2022-01-01
+title: Alfred 
+subtitle: Robots for the Elderly
+contributors: Atharva Pusalkar, Abhinav Gupta, Praveen Venkatesh, Shivam Tripathy, Shaolin Kataria 
+date: 2023-01-01
 image: ../images/mainbot.jpg
 carousels: 
   - images: 
@@ -13,7 +13,7 @@ carousels:
     - image: ../images/robot_and_is.jpeg
       desc: Us, with the robot carrying a waterbottle.
 
-order: -40
+order: -19
 ---
 
 Auxilio Robotics is developing human-friendly, assistive robots that cater to patients in senior-living facilities and healthcare environments, in order to meet the growing concerns of labor shortage. The elder populous tends to sway away from the idea of "help" as it is a sign of old-age and dependence. A robot is something that serves them independence without having the need to rely on another human.
