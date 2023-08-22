@@ -12,7 +12,7 @@ carousels:
       desc: The team behind Alfred. 
     - image: ../images/robot_and_is.jpeg
       desc: Us, with the robot carrying a waterbottle.
-
+home: 10
 order: -19
 ---
 

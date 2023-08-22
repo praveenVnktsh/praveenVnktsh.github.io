@@ -1,6 +1,5 @@
 ---
 order: -20
-home: 10
 title: PD* Lite
 subtitle: An Improved Dynamic Prioritization Scheme for Conflict-Free Path Planning of Multi-Agent Systems 
 contributors: Praveen Venkatesh, Aditya Rathi, Rohit G, Madhu Vadali
