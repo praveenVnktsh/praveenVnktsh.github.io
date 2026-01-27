@@ -1,0 +1,315 @@
+---
+/**
+ * Hero - Full redesign
+ * 
+ * Minimal, technical, role-driven landing with point-cloud morphing.
+ */
+
+interface RoleContent {
+  label: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: string[];
+}
+
+const roleContent: Record<string, RoleContent> = {
+  home: {
+    label: 'Home',
+    title: 'Praveen Venkatesh',
+    subtitle: 'Perception Engineer · Robotics & CV',
+    description: 'I build systems that let machines see the world, then shape those data points into decisions.',
+    highlights: ['M.S. Robotics, CMU', 'Perception at Mach9', 'Production ML systems'],
+  },
+  engineer: {
+    label: 'Engineer',
+    title: 'Engineer',
+    subtitle: 'Mapping · Calibration · Inference',
+    description: 'I ship LiDAR-vision pipelines and production ML infrastructure for city-scale mapping.',
+    highlights: ['HD mapping systems', 'Self-supervised calibration', 'Real-time inference'],
+  },
+  explorer: {
+    label: 'Explorer',
+    title: 'Explorer',
+    subtitle: 'Ventures · Research · Field Work',
+    description: 'I move from theory to terrain: new ventures, research arcs, and real-world deployments.',
+    highlights: ['Aurum (AI finance)', 'MITACS Globalink', 'Founder/Builder'],
+  },
+  artist: {
+    label: 'Artist',
+    title: 'Artist',
+    subtitle: 'Writing · Teaching · Craft',
+    description: 'I translate complexity into clarity through writing, mentoring, and creative systems.',
+    highlights: ['41K+ readers', 'Teaching assistantships', 'Creative tooling'],
+  },
+};
+---
+
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-header">
+      <span class="hero-eyebrow">Perceptual Portfolio</span>
+      <div class="hero-tabs" role="tablist" aria-label="Choose role">
+        {Object.entries(roleContent).map(([key, role], index) => (
+          <button
+            class:list={['hero-tab', index === 0 && 'active']}
+            role="tab"
+            aria-selected={index === 0 ? 'true' : 'false'}
+            data-role={key}
+          >
+            {role.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title" id="hero-title">{roleContent.home.title}</h1>
+      <p class="hero-subtitle" id="hero-subtitle">{roleContent.home.subtitle}</p>
+      <p class="hero-description" id="hero-description">{roleContent.home.description}</p>
+
+      <div class="hero-highlights" id="hero-highlights">
+        {roleContent.home.highlights.map(item => (
+          <span class="hero-chip">{item}</span>
+        ))}
+      </div>
+
+      <div class="hero-actions">
+        <a class="hero-link" href="#engineer">Engineer Work</a>
+        <a class="hero-link" href="#explorer">Ventures</a>
+        <a class="hero-link" href="#artist">Writing</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-hint">
+    <span>move to interact</span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .hero-inner {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--color-text-muted);
+  }
+
+  .hero-tabs {
+    display: inline-flex;
+    gap: 0.5rem;
+    padding: 0.35rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.02);
+    width: fit-content;
+  }
+
+  .hero-tab {
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .hero-tab.active {
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-title {
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mode-color);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-description {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+  }
+
+  .hero-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.75rem 0 2.5rem;
+  }
+
+  .hero-chip {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--color-text-secondary);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .hero-link:hover {
+    color: var(--mode-color);
+    border-color: var(--mode-color);
+  }
+
+  .hero-hint {
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 5rem 1.5rem 3rem;
+    }
+
+    .hero-tabs {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-hint {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import type { Role } from '../scripts/pointcloud-morph';
+
+  const roleData: Record<Role, { title: string; subtitle: string; description: string; highlights: string[] }> = {
+    home: {
+      title: 'Praveen Venkatesh',
+      subtitle: 'Perception Engineer · Robotics & CV',
+      description: 'I build systems that let machines see the world, then shape those data points into decisions.',
+      highlights: ['M.S. Robotics, CMU', 'Perception at Mach9', 'Production ML systems'],
+    },
+    engineer: {
+      title: 'Engineer',
+      subtitle: 'Mapping · Calibration · Inference',
+      description: 'I ship LiDAR-vision pipelines and production ML infrastructure for city-scale mapping.',
+      highlights: ['HD mapping systems', 'Self-supervised calibration', 'Real-time inference'],
+    },
+    explorer: {
+      title: 'Explorer',
+      subtitle: 'Ventures · Research · Field Work',
+      description: 'I move from theory to terrain: new ventures, research arcs, and real-world deployments.',
+      highlights: ['Aurum (AI finance)', 'MITACS Globalink', 'Founder/Builder'],
+    },
+    artist: {
+      title: 'Artist',
+      subtitle: 'Writing · Teaching · Craft',
+      description: 'I translate complexity into clarity through writing, mentoring, and creative systems.',
+      highlights: ['41K+ readers', 'Teaching assistantships', 'Creative tooling'],
+    },
+  };
+
+  const modeColors: Record<Role, string> = {
+    home: '#8b5cf6',
+    engineer: '#3b82f6',
+    explorer: '#10b981',
+    artist: '#f43f5e',
+  };
+
+  function updateHero(role: Role) {
+    const title = document.getElementById('hero-title');
+    const subtitle = document.getElementById('hero-subtitle');
+    const description = document.getElementById('hero-description');
+    const highlights = document.getElementById('hero-highlights');
+    if (!title || !subtitle || !description || !highlights) return;
+
+    const content = roleData[role];
+    title.textContent = content.title;
+    subtitle.textContent = content.subtitle;
+    description.textContent = content.description;
+    highlights.innerHTML = content.highlights.map(item => `<span class="hero-chip">${item}</span>`).join('');
+
+    document.body.setAttribute('data-mode', role);
+    document.documentElement.style.setProperty('--mode-color', modeColors[role]);
+    window.dispatchEvent(new CustomEvent('setrole', { detail: { role } }));
+  }
+
+  function initHero() {
+    const tabs = document.querySelectorAll('.hero-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const role = tab.getAttribute('data-role') as Role;
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        updateHero(role);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHero);
+  } else {
+    initHero();
+  }
+</script>

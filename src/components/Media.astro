@@ -1,0 +1,111 @@
+---
+import SectionHeader from './ui/SectionHeader.astro';
+import DiffusionCard from './DiffusionCard.astro';
+
+const mediaFeatures = [
+  {
+    title: 'CMU Team Explores Future of Caregiving With Assistive Robot',
+    publication: 'CMU School of Computer Science News',
+    date: 'July 2023',
+    description: 'Featured and quoted extensively in official coverage of Alfred robot deployment at Vitalia senior living facility.',
+    link: 'https://www.cs.cmu.edu/news/2023/care-home-robot',
+    image: '/images/alfred_team.jpeg',
+    featured: true,
+  },
+  {
+    title: 'IIT students create device which can help you eat without use of arms',
+    publication: 'Indian Express',
+    date: 'July 2019',
+    description: 'Voice-assisted FoodBuddy device enables independent dining for people with disabilities.',
+    link: 'https://indianexpress.com/article/education/iit-students-create-device-which-can-help-you-eat-without-use-of-arms-works-on-voice-command-5836744/',
+    image: null,
+    featured: false,
+  },
+  {
+    title: 'Voice-assisted FoodBuddy lets people without functioning arms eat independently',
+    publication: 'Firstpost',
+    date: 'July 2019',
+    description: 'Coverage of FoodBuddy assistive device for people with disabilities.',
+    link: 'https://www.firstpost.com/tech/science/voice-assisted-foodbuddy-lets-people-without-functioning-arms-eat-independently-7022771.html',
+    image: null,
+    featured: false,
+  },
+];
+---
+
+<section class="section bg-[var(--color-bg-secondary)]">
+  <div class="container">
+    <SectionHeader
+      title="Media & Press"
+      subtitle="Featured in major publications"
+    />
+
+    <div class="max-w-4xl mx-auto">
+      <!-- Featured Article -->
+      {mediaFeatures.filter(m => m.featured).map(article => (
+        <div class="mb-8">
+          <a
+            href={article.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block"
+          >
+            <DiffusionCard particleCount={100} class="overflow-hidden">
+              <div class="grid md:grid-cols-2 gap-6">
+                {article.image && (
+                  <div class="-m-6 md:-ml-6 md:-my-6 md:mr-0">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      class="w-full h-full object-cover min-h-[200px]"
+                    />
+                  </div>
+                )}
+                <div class="flex flex-col justify-center">
+                  <span class="badge badge-accent mb-3 w-fit">Featured</span>
+                  <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-2 hover:text-[var(--color-accent)]">
+                    {article.title}
+                  </h3>
+                  <p class="text-sm text-[var(--color-accent)] mb-3">
+                    {article.publication} • {article.date}
+                  </p>
+                  <p class="text-[var(--color-text-secondary)]">
+                    {article.description}
+                  </p>
+                </div>
+              </div>
+            </DiffusionCard>
+          </a>
+        </div>
+      ))}
+
+      <!-- Other Press Mentions -->
+      <h3 class="text-lg font-bold mb-4 text-[var(--color-text-primary)]">
+        FoodBuddy Press Coverage (27+ articles via PTI syndication)
+      </h3>
+      <div class="grid md:grid-cols-2 gap-4">
+        {mediaFeatures.filter(m => !m.featured).map((article, index) => (
+          <a
+            href={article.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block"
+          >
+            <DiffusionCard particleCount={50}>
+              <h4 class="font-semibold text-[var(--color-text-primary)] mb-1 hover:text-[var(--color-accent)]">
+                {article.title}
+              </h4>
+              <p class="text-sm text-[var(--color-accent)]">
+                {article.publication} • {article.date}
+              </p>
+            </DiffusionCard>
+          </a>
+        ))}
+      </div>
+
+      <p class="text-center text-sm text-[var(--color-text-muted)] mt-6">
+        + 25 more articles across Indian news outlets
+      </p>
+    </div>
+  </div>
+</section>

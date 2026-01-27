@@ -1,0 +1,150 @@
+---
+import SectionHeader from './ui/SectionHeader.astro';
+import DiffusionCard from './DiffusionCard.astro';
+
+const experiences = [
+  {
+    company: 'Mach9 Robotics',
+    location: 'Pittsburgh, PA',
+    role: 'Perception Software Engineer',
+    period: 'June 2024 - Present',
+    type: 'current',
+    projects: [
+      {
+        title: 'Multi-Modal 3D HD Mapping',
+        highlights: [
+          'Leading development of sub-centimeter HD mapping system fusing multi-view imagery and LiDAR',
+          'Deployed to 20+ enterprise customers over 10,000+ miles generating $3M+ ARR',
+          'Extended MapTR from 2D to 3D achieving 30%+ internal performance gains',
+          'Built production ML infrastructure enabling rapid iteration from hypothesis to evaluation',
+        ],
+      },
+      {
+        title: 'Self-Supervised Camera-LiDAR Calibration',
+        highlights: [
+          'Developed novel self-supervised learning-to-optimize architecture',
+          'Achieved <0.2° rotation error and ±0.03cm translation error',
+          'Built distributed deployment pipeline delivering calibration as invisible infrastructure',
+        ],
+      },
+    ],
+    tech: ['PyTorch', 'CUDA', 'ROS', 'Point Clouds', 'Transformers', 'Docker'],
+  },
+  {
+    company: 'Mach9 Robotics',
+    location: 'Pittsburgh, PA',
+    role: 'Perception Software Intern',
+    period: 'May 2023 - Aug 2023',
+    type: 'past',
+    projects: [
+      {
+        title: 'HD Mapping Pipeline',
+        highlights: [
+          'Developed pipeline to convert fused-point clouds into 2D vectorized polylines',
+          'Optimized Mask2Former inference within real-time ROS infrastructure',
+          'Implemented C++ geometric fitting kernels',
+        ],
+      },
+    ],
+    tech: ['PyTorch', 'ROS', 'C++', 'OpenCV'],
+  },
+  {
+    company: 'Carnegie Mellon University',
+    location: 'Pittsburgh, PA',
+    role: 'Graduate Researcher, Robotics Institute',
+    period: 'Jan 2023 - Dec 2023',
+    type: 'past',
+    projects: [
+      {
+        title: 'Alfred Robot - Assistive Robotics',
+        highlights: [
+          'Developed autonomous assistive robot for elderly care',
+          'Deployed at Vitalia senior living facility',
+          'Integrated GPT-3.5 with physical robotics for grounded language understanding',
+          'Featured in CMU SCS News',
+        ],
+      },
+    ],
+    tech: ['ROS', 'PyTorch', 'LLMs', 'MoveIt', 'Computer Vision'],
+  },
+  {
+    company: 'Western University',
+    location: 'London, ON, Canada',
+    role: 'Visiting Researcher (MITACS Globalink Fellow)',
+    period: 'May 2021 - Nov 2021',
+    type: 'past',
+    projects: [
+      {
+        title: 'Single View Plant Modelling',
+        highlights: [
+          'Developed two-stage perception framework coupling UNet with coordinate-descent optimizer',
+          'Reconstructed deformable 3D plant structures from single-view images',
+        ],
+      },
+    ],
+    tech: ['PyTorch', 'Computer Vision', '3D Reconstruction'],
+  },
+];
+---
+
+<section class="section">
+  <div class="container">
+    <SectionHeader
+      title="Experience"
+      subtitle="Building production systems at scale"
+    />
+
+    <div class="max-w-4xl mx-auto">
+      <div class="timeline">
+        {experiences.map((exp, index) => (
+          <div class="timeline-item">
+            <DiffusionCard particleCount={100}>
+              <!-- Header -->
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-[var(--color-text-primary)]">
+                    {exp.role}
+                  </h3>
+                  <p class="text-[var(--color-accent)] font-medium">
+                    {exp.company}
+                    <span class="text-[var(--color-text-muted)]"> • {exp.location}</span>
+                  </p>
+                </div>
+                <div class="flex items-center gap-2">
+                  {exp.type === 'current' && (
+                    <span class="badge badge-green">Current</span>
+                  )}
+                  <span class="text-sm text-[var(--color-text-muted)]">{exp.period}</span>
+                </div>
+              </div>
+
+              <!-- Projects -->
+              {exp.projects.map(project => (
+                <div class="mb-4 last:mb-0">
+                  <h4 class="font-semibold text-[var(--color-text-primary)] mb-2">
+                    {project.title}
+                  </h4>
+                  <ul class="space-y-1 text-sm text-[var(--color-text-secondary)]">
+                    {project.highlights.map(highlight => (
+                      <li class="flex gap-2">
+                        <span class="text-[var(--color-accent)]">▸</span>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+              <!-- Tech Stack -->
+              <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-[var(--color-border)]">
+                {exp.tech.map(tech => (
+                  <span class="tech-badge">{tech}</span>
+                ))}
+              </div>
+            </DiffusionCard>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

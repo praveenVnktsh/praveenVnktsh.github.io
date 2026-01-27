@@ -1,0 +1,24 @@
+---
+interface Props {
+  variant?: 'default' | 'accent' | 'purple' | 'green';
+  size?: 'sm' | 'md';
+}
+
+const { variant = 'default', size = 'md' } = Astro.props;
+
+const variantClasses = {
+  default: 'badge',
+  accent: 'badge badge-accent',
+  purple: 'badge badge-purple',
+  green: 'badge badge-green',
+};
+
+const sizeClasses = {
+  sm: 'text-xs px-2 py-0.5',
+  md: 'text-sm px-3 py-1',
+};
+---
+
+<span class={`${variantClasses[variant]} ${sizeClasses[size]}`}>
+  <slot />
+</span>

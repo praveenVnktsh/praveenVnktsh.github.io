@@ -1,29 +1,35 @@
-name: 'Automatic build'
+name: Deploy Redirect to GitHub Pages
+
 on:
   push:
     branches:
-      - main
-    paths-ignore:
-      - .gitignore
-      - README.md
-      - LICENSE
+      - gh-pages
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  continuous-delivery:
-
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # for posts's lastmod
+        uses: actions/checkout@v4
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Upload redirect pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          ruby-version: 2.7
-          bundler-cache: true
+          path: ./gh-pages-redirect
 
-      - name: Deploy
-        run: bash tools/deploy.sh
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

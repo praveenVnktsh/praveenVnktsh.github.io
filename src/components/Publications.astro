@@ -1,0 +1,202 @@
+---
+import SectionHeader from './ui/SectionHeader.astro';
+import DiffusionCard from './DiffusionCard.astro';
+
+const publications = {
+  patents: [
+    {
+      title: 'FoodBuddy: Voice-Assisted Dining Device for People with Disabilities',
+      authors: 'P. Venkatesh*, C. Francis*',
+      venue: 'Provisional Patent Application',
+      year: '2019',
+      location: 'US & India',
+      link: null,
+    },
+  ],
+  journals: [
+    {
+      title: 'FF-RRT*: A Sampling-Based Planner for Multirobot Flexible Formation Path Planning',
+      authors: 'P. Venkatesh, A. Rathi, R. Giridharan, M. Vadali',
+      venue: 'ASME Journal of Mechanisms and Robotics',
+      year: '2024',
+      volume: 'Vol. 16, No. 10',
+      link: 'https://doi.org/10.1115/1.4064502',
+    },
+  ],
+  conferences: [
+    {
+      title: 'Memory Guided Road Segmentation',
+      authors: 'P. Venkatesh*, R. Rana*, V. Jain',
+      venue: 'ICIAP (21st International Conference on Image Analysis and Processing)',
+      year: '2021',
+      publisher: 'Springer LNCS',
+      link: null,
+    },
+    {
+      title: 'Program Synthesis: Does Feedback Help?',
+      authors: 'H. Patel*, P. Venkatesh*, et al.',
+      venue: 'ACM CODS-COMAD',
+      year: '2022',
+      link: null,
+    },
+    {
+      title: 'Indian Classical Music Synthesis Using GANs',
+      authors: 'G. Viramgami*, R. Chauhan*, P. Venkatesh, R. Guha',
+      venue: 'ACM CODS-COMAD',
+      year: '2022',
+      link: null,
+    },
+  ],
+  preprints: [
+    {
+      title: 'Single View Plant Modelling',
+      authors: 'P. Venkatesh, A. Garg, S. Shukla, Y. Zhang',
+      venue: 'Technical Report',
+      year: '2022',
+      link: null,
+    },
+    {
+      title: 'PD* Lite: Real-Time Multi-Agent Path Planning',
+      authors: 'R. Giridharan, P. Venkatesh, A. Rathi, M. Vadali',
+      venue: 'arXiv',
+      year: '2021',
+      link: 'https://arxiv.org/abs/2111.06056',
+    },
+    {
+      title: 'Learning By Cheating: End-to-End Autonomous Drone Racing',
+      authors: 'P. Venkatesh*, R. Rana*',
+      venue: 'arXiv',
+      year: '2021',
+      link: 'https://arxiv.org/abs/2111.06056',
+    },
+    {
+      title: 'Fast And Real-Time End To End Control In Autonomous Racing Cars',
+      authors: 'R. Rana*, P. Venkatesh*',
+      venue: 'arXiv',
+      year: '2021',
+      link: 'https://arxiv.org/abs/2111.15343',
+    },
+  ],
+};
+---
+
+<section class="section">
+  <div class="container">
+    <SectionHeader
+      title="Research & Publications"
+      subtitle="Academic contributions to robotics and computer vision"
+    />
+
+    <div class="max-w-4xl mx-auto space-y-12">
+      <!-- Patents -->
+      <div>
+        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-[var(--color-accent)]">⚙️</span>
+          Patents
+        </h3>
+        <div class="space-y-4">
+          {publications.patents.map(pub => (
+            <DiffusionCard particleCount={50}>
+              <h4 class="font-semibold text-[var(--color-text-primary)] mb-1">
+                {pub.title}
+              </h4>
+              <p class="text-sm text-[var(--color-text-secondary)] mb-2">
+                {pub.authors}
+              </p>
+              <p class="paper-venue text-sm">
+                {pub.venue} • {pub.location} • {pub.year}
+              </p>
+            </DiffusionCard>
+          ))}
+        </div>
+      </div>
+
+      <!-- Journal Publications -->
+      <div>
+        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-[var(--color-accent)]">📰</span>
+          Journal Publications
+        </h3>
+        <div class="space-y-4">
+          {publications.journals.map(pub => (
+            <DiffusionCard particleCount={60}>
+              <h4 class="font-semibold text-[var(--color-text-primary)] mb-1">
+                {pub.link ? (
+                  <a href={pub.link} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)]">
+                    {pub.title}
+                    <svg class="w-4 h-4 inline ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                ) : pub.title}
+              </h4>
+              <p class="text-sm text-[var(--color-text-secondary)] mb-2">
+                {pub.authors}
+              </p>
+              <p class="paper-venue text-sm">
+                {pub.venue} • {pub.volume} • {pub.year}
+              </p>
+            </DiffusionCard>
+          ))}
+        </div>
+      </div>
+
+      <!-- Conference Papers -->
+      <div>
+        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-[var(--color-accent)]">📄</span>
+          Conference Papers
+        </h3>
+        <div class="space-y-4">
+          {publications.conferences.map(pub => (
+            <DiffusionCard particleCount={50}>
+              <h4 class="font-semibold text-[var(--color-text-primary)] mb-1">
+                {pub.title}
+              </h4>
+              <p class="text-sm text-[var(--color-text-secondary)] mb-2">
+                {pub.authors}
+              </p>
+              <p class="paper-venue text-sm">
+                {pub.venue} • {pub.year}
+              </p>
+            </DiffusionCard>
+          ))}
+        </div>
+      </div>
+
+      <!-- Preprints -->
+      <div>
+        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span class="text-[var(--color-accent)]">📝</span>
+          Preprints & Technical Reports
+        </h3>
+        <div class="space-y-4">
+          {publications.preprints.map(pub => (
+            <DiffusionCard particleCount={50}>
+              <h4 class="font-semibold text-[var(--color-text-primary)] mb-1">
+                {pub.link ? (
+                  <a href={pub.link} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-accent)]">
+                    {pub.title}
+                    <svg class="w-4 h-4 inline ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                ) : pub.title}
+              </h4>
+              <p class="text-sm text-[var(--color-text-secondary)] mb-2">
+                {pub.authors}
+              </p>
+              <p class="paper-venue text-sm">
+                {pub.venue} • {pub.year}
+              </p>
+            </DiffusionCard>
+          ))}
+        </div>
+      </div>
+
+      <p class="text-center text-sm text-[var(--color-text-muted)] mt-8">
+        * denotes equal contribution
+      </p>
+    </div>
+  </div>
+</section>

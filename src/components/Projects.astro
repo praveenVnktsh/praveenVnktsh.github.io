@@ -1,0 +1,175 @@
+---
+import SectionHeader from './ui/SectionHeader.astro';
+import DiffusionCard from './DiffusionCard.astro';
+
+const featuredProjects = [
+  {
+    title: 'Alfred - Zero-Shot Generalist Robot',
+    description: 'Autonomous assistive robot for elderly care deployed at senior living facilities. Integrates LLMs with physical robotics for grounded language understanding.',
+    image: '/images/alfred_team.jpeg',
+    tags: ['ROS', 'PyTorch', 'LLMs', 'MoveIt'],
+    link: 'https://mrsdprojects.ri.cmu.edu/2023teamf/',
+    featured: true,
+    press: 'Featured in CMU SCS News',
+  },
+  {
+    title: 'Audio-Augmented Diffusion Policies',
+    description: 'Novel approach combining audio signals with diffusion-based robot control policies for improved manipulation performance.',
+    image: null,
+    tags: ['Diffusion Models', 'Audio ML', 'Robot Learning'],
+    link: null,
+    featured: true,
+  },
+  {
+    title: 'Deep RL Quadruped Locomotion',
+    description: 'End-to-end reinforcement learning for robust quadruped robot locomotion using PPO and domain randomization.',
+    image: '/images/quad_1.gif',
+    tags: ['PyTorch', 'Isaac Gym', 'PPO', 'Sim2Real'],
+    link: null,
+    featured: true,
+  },
+];
+
+const projects = [
+  {
+    category: 'Research',
+    items: [
+      { title: 'Flexible Formation RRT*', description: 'Multi-robot path planning with flexible formations', tags: ['Path Planning', 'Multi-Robot'] },
+      { title: 'Fast RaceCAR', description: 'Real-time autonomous racing through representation learning', tags: ['Deep Learning', 'Racing'] },
+      { title: 'Memory Guided Segmentation', description: 'Road segmentation with temporal memory', tags: ['Computer Vision', 'Segmentation'] },
+      { title: 'Learning by Cheating', description: 'Zero-shot drone navigation via sim2real transfer', tags: ['Sim2Real', 'Drones'] },
+      { title: 'Single View Plant Modelling', description: '3D plant reconstruction from single images', tags: ['3D Vision', 'UNet'] },
+      { title: 'Multi-Agent Path Finding', description: 'Efficient MAPF with prioritized planning', tags: ['Path Planning', 'Multi-Agent'] },
+    ],
+  },
+  {
+    category: 'Applications',
+    items: [
+      { title: 'Amalthea App', description: 'Event management app with 1500+ downloads', tags: ['Flutter', 'Firebase'] },
+      { title: 'NNViz', description: 'Neural network architecture visualization tool', tags: ['Visualization', 'Education'] },
+      { title: 'RenderLib', description: 'Custom rendering library for 3D graphics', tags: ['Graphics', 'C++'] },
+    ],
+  },
+  {
+    category: 'Implementations',
+    items: [
+      { title: 'RRT* Path Planning', description: 'Optimal path planning implementation', tags: ['Algorithms'] },
+      { title: 'Panorama Stitching', description: 'Multi-image panorama creation', tags: ['OpenCV'] },
+      { title: 'EigenFace Recognition', description: 'PCA-based face recognition', tags: ['ML Classic'] },
+      { title: 'Racing Line Optimization', description: 'Optimal racing line computation', tags: ['Optimization'] },
+      { title: 'Quadrotor Control', description: 'PID and LQR control for drones', tags: ['Controls'] },
+    ],
+  },
+];
+---
+
+<section class="section bg-[var(--color-bg-secondary)]">
+  <div class="container">
+    <SectionHeader
+      title="Projects"
+      subtitle="From research prototypes to deployed systems"
+    />
+
+    <!-- Featured Projects -->
+    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
+      {featuredProjects.map((project, index) => (
+        <DiffusionCard particleCount={80}>
+          <div class="terminal-header -mx-6 -mt-6 mb-4 rounded-t-xl">
+            <span class="terminal-dot terminal-dot-red"></span>
+            <span class="terminal-dot terminal-dot-yellow"></span>
+            <span class="terminal-dot terminal-dot-green"></span>
+            <span class="ml-2 text-sm text-[var(--color-text-muted)] font-mono">featured</span>
+          </div>
+
+          <div class="flex flex-col h-full">
+            {project.image && (
+              <div class="mb-4 -mx-6">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-40 object-cover"
+                />
+              </div>
+            )}
+
+            <h3 class="text-lg font-bold text-[var(--color-text-primary)] mb-2">
+              {project.title}
+            </h3>
+
+            {project.press && (
+              <p class="text-xs text-[var(--color-accent)] mb-2 font-mono">
+                {project.press}
+              </p>
+            )}
+
+            <p class="text-sm text-[var(--color-text-secondary)] mb-4 flex-grow">
+              {project.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mt-auto">
+              {project.tags.map(tag => (
+                <span class="tech-badge">{tag}</span>
+              ))}
+            </div>
+
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-4 text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-secondary)] flex items-center gap-1"
+              >
+                View Project
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            )}
+          </div>
+        </DiffusionCard>
+      ))}
+    </div>
+
+    <!-- Project Grid by Category -->
+    <div class="max-w-6xl mx-auto space-y-12">
+      {projects.map((category, catIndex) => (
+        <div>
+          <h3 class="text-xl font-bold mb-6 text-[var(--color-text-primary)]">
+            {category.category}
+          </h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {category.items.map(project => (
+              <DiffusionCard particleCount={40}>
+                <h4 class="font-semibold text-[var(--color-text-primary)] mb-2">
+                  {project.title}
+                </h4>
+                <p class="text-sm text-[var(--color-text-secondary)] mb-3">
+                  {project.description}
+                </p>
+                <div class="flex flex-wrap gap-1">
+                  {project.tags.map(tag => (
+                    <span class="tech-badge text-xs">{tag}</span>
+                  ))}
+                </div>
+              </DiffusionCard>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a
+        href="https://github.com/praveenVnktsh"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-secondary"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        View All on GitHub
+      </a>
+    </div>
+  </div>
+</section>

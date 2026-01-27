@@ -1,0 +1,190 @@
+---
+import SectionHeader from './ui/SectionHeader.astro';
+import DiffusionCard from './DiffusionCard.astro';
+
+const awards = {
+  academic: [
+    {
+      title: "Director's Gold Medal",
+      organization: 'IIT Gandhinagar',
+      year: '2022',
+      description: 'Highest honor awarded to a single graduating student across all disciplines for outstanding overall performance including leadership, academics, sports, and extracurriculars.',
+      icon: '🥇',
+    },
+    {
+      title: 'Institute Gold Medal',
+      organization: 'IIT Gandhinagar',
+      year: '2022',
+      description: 'Best academic performance in Electrical Engineering. Achieved Rank 1 with GPA 9.33/10.',
+      icon: '🥇',
+    },
+    {
+      title: 'Gold Medal for Excellence in Indoor Sports',
+      organization: 'IIT Gandhinagar',
+      year: '2022',
+      description: 'Table Tennis excellence. Represented institute at Inter-IIT Sports Meets.',
+      icon: '🏆',
+    },
+    {
+      title: 'James R. Swartz Entrepreneurial Fellow',
+      organization: 'Carnegie Mellon University',
+      year: '2023-2024',
+      description: 'Select cohort of 12 students for technology entrepreneurship at CMU\'s Swartz Center.',
+      icon: '🎓',
+    },
+  ],
+  fellowships: [
+    {
+      title: 'MITACS Globalink Research Internship',
+      organization: 'Canadian Government',
+      year: '2021',
+      description: 'Competitive international research award. Acceptance rate <15%.',
+      icon: '🌍',
+    },
+    {
+      title: 'O.P. Jindal Engineering & Management Scholarship',
+      organization: 'OPJEMS',
+      year: '2021',
+      description: 'Awarded to top engineering students across India for academic and leadership excellence.',
+      icon: '💵',
+    },
+  ],
+  competitions: [
+    {
+      title: 'JEE Advanced 2018',
+      result: 'AIR 3326 / 1,55,158',
+      icon: '📊',
+    },
+    {
+      title: 'JEE Main 2018',
+      result: 'AIR 4016 / 10.5 lakh',
+      icon: '📊',
+    },
+    {
+      title: 'Invent for the Planet Hackathon',
+      result: 'Regional Winning Team',
+      organization: 'Texas A&M University',
+      year: '2020',
+      icon: '🏆',
+    },
+    {
+      title: 'HCL Hack IITK',
+      result: 'Top 32 of 3,342 teams',
+      year: '2020',
+      icon: '💻',
+    },
+    {
+      title: 'National Topper - Computer Science',
+      result: '100% in AISSCE 2018',
+      icon: '🎯',
+    },
+  ],
+  admissions: [
+    'CMU', 'Caltech', 'UPenn', 'UMich', 'Georgia Tech', 'JHU', 'UCLA', 'UCSD', 'Purdue'
+  ],
+};
+---
+
+<section class="section">
+  <div class="container">
+    <SectionHeader
+      title="Awards & Recognition"
+      subtitle="Academic honors, fellowships, and competitions"
+    />
+
+    <div class="max-w-5xl mx-auto">
+      <!-- Academic Honors -->
+      <div class="mb-12">
+        <h3 class="reveal text-xl font-bold mb-6 flex items-center gap-2">
+          <span>🎓</span> Academic Honors
+        </h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          {awards.academic.map((award, index) => (
+            <DiffusionCard particleCount={60}>
+              <div class="flex items-start gap-4">
+                <span class="text-3xl">{award.icon}</span>
+                <div>
+                  <h4 class="font-bold text-[var(--color-text-primary)]">
+                    {award.title}
+                  </h4>
+                  <p class="text-sm text-[var(--color-accent)] mb-2">
+                    {award.organization} • {award.year}
+                  </p>
+                  <p class="text-sm text-[var(--color-text-secondary)]">
+                    {award.description}
+                  </p>
+                </div>
+              </div>
+            </DiffusionCard>
+          ))}
+        </div>
+      </div>
+
+      <!-- Fellowships -->
+      <div class="mb-12">
+        <h3 class="reveal text-xl font-bold mb-6 flex items-center gap-2">
+          <span>💰</span> Fellowships & Scholarships
+        </h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          {awards.fellowships.map((award, index) => (
+            <DiffusionCard particleCount={60}>
+              <div class="flex items-start gap-4">
+                <span class="text-3xl">{award.icon}</span>
+                <div>
+                  <h4 class="font-bold text-[var(--color-text-primary)]">
+                    {award.title}
+                  </h4>
+                  <p class="text-sm text-[var(--color-accent)] mb-2">
+                    {award.organization} • {award.year}
+                  </p>
+                  <p class="text-sm text-[var(--color-text-secondary)]">
+                    {award.description}
+                  </p>
+                </div>
+              </div>
+            </DiffusionCard>
+          ))}
+        </div>
+      </div>
+
+      <!-- Competitions -->
+      <div class="mb-12">
+        <h3 class="reveal text-xl font-bold mb-6 flex items-center gap-2">
+          <span>🏆</span> Competitions & Exams
+        </h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {awards.competitions.map((comp, index) => (
+            <DiffusionCard particleCount={40}>
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">{comp.icon}</span>
+                <div>
+                  <h4 class="font-semibold text-[var(--color-text-primary)] text-sm">
+                    {comp.title}
+                  </h4>
+                  <p class="text-sm font-mono text-[var(--color-accent)]">
+                    {comp.result}
+                  </p>
+                </div>
+              </div>
+            </DiffusionCard>
+          ))}
+        </div>
+      </div>
+
+      <!-- Graduate Admissions -->
+      <div class="reveal">
+        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+          <span>🎯</span> Graduate School Admissions (2022)
+        </h3>
+        <p class="text-[var(--color-text-secondary)] mb-4">
+          Admitted to 9 top robotics programs:
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {awards.admissions.map(school => (
+            <span class="badge badge-accent">{school}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

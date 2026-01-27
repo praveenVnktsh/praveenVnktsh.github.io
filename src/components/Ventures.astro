@@ -1,0 +1,129 @@
+---
+import SectionHeader from './ui/SectionHeader.astro';
+import DiffusionCard from './DiffusionCard.astro';
+
+const ventures = [
+  {
+    name: 'Aurum',
+    tagline: 'Privacy-first Personal Finance AI',
+    description: 'Local-first architecture with on-device learning. Automatically tracks income, expenses, and budgets while adapting to user behavior.',
+    status: 'Beta',
+    statusColor: 'green',
+    link: 'https://www.tryaurum.tech',
+    year: '2025',
+    metrics: null,
+    image: null,
+  },
+  {
+    name: 'Robotic Chef Startup',
+    tagline: 'CMU Project Olympus Incubator',
+    description: 'Selected for CMU\'s Project Olympus Incubator Program at the Swartz Center for Entrepreneurship. Explored autonomous cooking robot through customer discovery and business model development.',
+    status: 'Incubated',
+    statusColor: 'purple',
+    link: null,
+    year: '2023-2024',
+    metrics: 'Project Olympus has supported startups with $1B+ in follow-on funding (including Duolingo)',
+    image: null,
+  },
+  {
+    name: 'InsIIT',
+    tagline: 'Official IIT Gandhinagar Campus App',
+    description: 'Founded and led team of 5 to build comprehensive campus life app. Features include bus schedules, dining menu with QR codes, campus map, events calendar.',
+    status: 'Active',
+    statusColor: 'green',
+    link: 'https://play.google.com/store/apps/details?id=com.metis.insiit',
+    year: '2019-2022',
+    metrics: '1,000+ downloads on day 1 • Still used 4+ years later',
+    image: '/images/insiit_1.png',
+  },
+  {
+    name: 'Library IITGN',
+    tagline: 'Official Library Application',
+    description: 'Independently developed the official Library App for IIT Gandhinagar. Real-time book availability, reviews and ratings, personalized book lists, and course readings.',
+    status: 'Active',
+    statusColor: 'green',
+    link: 'https://play.google.com/store/apps/details?id=library.iitgn',
+    year: '2020',
+    metrics: '1,000+ downloads',
+    image: null,
+  },
+  {
+    name: 'FoodBuddy',
+    tagline: 'Voice-Assisted Dining Device',
+    description: 'Voice-assisted dining device for people with disabilities. Designed and prototyped assistive eating device enabling independent dining for individuals without functioning arms.',
+    status: 'Patented',
+    statusColor: 'accent',
+    link: null,
+    year: '2019',
+    metrics: 'Provisional Patent (US & India) • 27+ press articles',
+    image: null,
+  },
+];
+---
+
+<section class="section bg-[var(--color-bg-secondary)]">
+  <div class="container">
+    <SectionHeader
+      title="Ventures"
+      subtitle="From ideas to deployed products"
+    />
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      {ventures.map((venture, index) => (
+        <DiffusionCard particleCount={60} class="h-full">
+          <div class="flex flex-col h-full">
+            {venture.image && (
+              <div class="mb-4 -mx-6 -mt-6">
+                <img
+                  src={venture.image}
+                  alt={venture.name}
+                  class="w-full h-40 object-cover rounded-t-xl"
+                />
+              </div>
+            )}
+
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <h3 class="text-xl font-bold text-[var(--color-text-primary)]">
+                {venture.name}
+              </h3>
+              <span class={`badge badge-${venture.statusColor} text-xs shrink-0`}>
+                {venture.status}
+              </span>
+            </div>
+
+            <p class="text-sm text-[var(--color-accent)] font-medium mb-3">
+              {venture.tagline}
+            </p>
+
+            <p class="text-sm text-[var(--color-text-secondary)] mb-4 flex-grow">
+              {venture.description}
+            </p>
+
+            {venture.metrics && (
+              <p class="text-xs text-[var(--color-text-muted)] mb-4 font-mono">
+                {venture.metrics}
+              </p>
+            )}
+
+            <div class="flex items-center justify-between mt-auto pt-4 border-t border-[var(--color-border)]">
+              <span class="text-sm text-[var(--color-text-muted)]">{venture.year}</span>
+              {venture.link && (
+                <a
+                  href={venture.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-secondary)] flex items-center gap-1"
+                >
+                  View
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
+        </DiffusionCard>
+      ))}
+    </div>
+  </div>
+</section>

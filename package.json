@@ -1,0 +1,23 @@
+{
+  "name": "praveenvnktsh-website",
+  "type": "module",
+  "version": "2.0.0",
+  "description": "Praveen Venkatesh's personal website - Perception Engineer, Researcher, Founder",
+  "author": "Praveen Venkatesh",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/animejs": "^3.1.13",
+    "@types/three": "^0.182.0",
+    "animejs": "^4.3.5",
+    "astro": "^5.16.15",
+    "tailwindcss": "^4.1.18",
+    "three": "^0.182.0"
+  }
+}

@@ -1,0 +1,112 @@
+---
+/**
+ * DiffusionCard - A card that materializes from particles as you scroll
+ *
+ * The card starts as scattered particles (noise) and as the user scrolls,
+ * particles coalesce to form the card shape, then the content fades in.
+ */
+
+interface Props {
+  class?: string;
+  particleCount?: number;
+  particleColor?: string;
+}
+
+const {
+  class: className = '',
+  particleCount = 80,
+  particleColor = 'var(--section-color, var(--mode-color))'
+} = Astro.props;
+
+// Generate unique ID for this card
+const cardId = `diffusion-card-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+  class:list={['diffusion-card-wrapper', className]}
+  data-diffusion-card
+  data-card-id={cardId}
+  data-particle-count={particleCount}
+>
+  <!-- Canvas for particles -->
+  <canvas
+    class="diffusion-card-canvas"
+    data-canvas-for={cardId}
+    aria-hidden="true"
+  ></canvas>
+
+  <!-- Noise overlay that fades out -->
+  <div class="diffusion-card-noise" aria-hidden="true"></div>
+
+  <!-- Actual card content -->
+  <div class="diffusion-card-content card">
+    <slot />
+  </div>
+</div>
+
+<style define:vars={{ particleColor }}>
+  .diffusion-card-wrapper {
+    position: relative;
+    --diffusion-progress: 0;
+  }
+
+  .diffusion-card-canvas {
+    position: absolute;
+    inset: -40px; /* Extend beyond card for particle scatter */
+    width: calc(100% + 80px);
+    height: calc(100% + 80px);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .diffusion-card-noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: calc(0.15 * (1 - var(--diffusion-progress)));
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+    z-index: 3;
+    pointer-events: none;
+    transition: opacity 0.1s ease-out;
+  }
+
+  .diffusion-card-content {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.98);
+    transition: opacity 0.4s ease-out, filter 0.4s ease-out, transform 0.4s ease-out;
+  }
+
+  .diffusion-card-wrapper.revealed .diffusion-card-content {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  /* When fully revealed, hide canvas */
+  .diffusion-card-wrapper.fully-revealed .diffusion-card-canvas {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
+
+  .diffusion-card-wrapper.fully-revealed .diffusion-card-noise {
+    opacity: 0;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .diffusion-card-content {
+      opacity: 1 !important;
+      filter: none !important;
+      transform: none !important;
+    }
+
+    .diffusion-card-canvas,
+    .diffusion-card-noise {
+      display: none;
+    }
+  }
+</style>

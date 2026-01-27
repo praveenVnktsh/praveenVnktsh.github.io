@@ -1,0 +1,103 @@
+---
+import SectionHeader from './ui/SectionHeader.astro';
+import DiffusionCard from './DiffusionCard.astro';
+
+const articles = [
+  {
+    title: 'Writing a Killer Statement of Purpose for Grad School',
+    platform: 'Medium',
+    views: '23,000+',
+    link: 'https://medium.com/@praveenvnktsh',
+    description: 'Comprehensive guide on crafting compelling SOPs for graduate admissions.',
+  },
+  {
+    title: 'Cracking the MITACS Globalink Research Internship',
+    platform: 'Medium',
+    views: '11,700+',
+    link: 'https://medium.com/@praveenvnktsh',
+    description: 'Step-by-step guide to securing the competitive MITACS fellowship.',
+  },
+  {
+    title: 'Exhaustive Guide to the GRE (Want 330+?)',
+    platform: 'Medium',
+    views: '5,200+',
+    link: 'https://medium.com/@praveenvnktsh',
+    description: 'Complete preparation strategy for achieving top GRE scores.',
+  },
+];
+
+const totalViews = '41,000+';
+---
+
+<section class="section">
+  <div class="container">
+    <SectionHeader
+      title="Writing"
+      subtitle="Technical writing and guides with 41K+ readers"
+    />
+
+    <div class="max-w-3xl mx-auto">
+      <!-- Stats Banner -->
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
+          <svg class="w-6 h-6 text-[var(--color-accent)]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+          </svg>
+          <span class="text-2xl font-bold gradient-text">{totalViews}</span>
+          <span class="text-[var(--color-text-secondary)]">total readers on Medium</span>
+        </div>
+      </div>
+
+      <!-- Articles -->
+      <div class="space-y-4">
+        {articles.map((article, index) => (
+          <a
+            href={article.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block"
+          >
+            <DiffusionCard particleCount={60}>
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex-grow">
+                  <h3 class="text-lg font-bold text-[var(--color-text-primary)] hover:text-[var(--color-accent)] mb-1">
+                    {article.title}
+                  </h3>
+                  <p class="text-sm text-[var(--color-text-secondary)]">
+                    {article.description}
+                  </p>
+                </div>
+                <div class="flex items-center gap-4 shrink-0">
+                  <div class="text-right">
+                    <div class="text-lg font-bold text-[var(--color-accent)]">
+                      {article.views}
+                    </div>
+                    <div class="text-xs text-[var(--color-text-muted)]">views</div>
+                  </div>
+                  <svg class="w-5 h-5 text-[var(--color-text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </div>
+              </div>
+            </DiffusionCard>
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-8">
+        <a
+          href="https://medium.com/@praveenvnktsh"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-secondary"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+          </svg>
+          Read All Articles on Medium
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+import SectionHeader from './ui/SectionHeader.astro';
+import DiffusionCard from './DiffusionCard.astro';
+
+const stats = [
+  { value: '398K+', label: 'Lines Shipped' },
+  { value: '5+', label: 'Publications' },
+  { value: '$3M+', label: 'ARR Impact' },
+  { value: '20+', label: 'Customers Deployed' },
+];
+---
+
+<section class="section bg-[var(--color-bg-secondary)]">
+  <div class="container">
+    <SectionHeader
+      title="About"
+      subtitle="The intersection of research, engineering, and entrepreneurship"
+    />
+
+    <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+      <!-- Image -->
+      <div class="reveal">
+        <div class="relative">
+          <img
+            src="/images/ski.jpg"
+            alt="Praveen Venkatesh"
+            class="rounded-2xl shadow-2xl w-full aspect-square object-cover"
+          />
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-accent-secondary)] rounded-xl -z-10"></div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="reveal stagger-1">
+        <p class="text-lg text-[var(--color-text-secondary)] mb-6">
+          I'm a <strong class="text-[var(--color-text-primary)]">Perception Software Engineer at Mach9</strong>,
+          where I lead the development of sub-centimeter 3D HD mapping systems that are deployed to 20+ enterprise
+          customers across 10,000+ miles of infrastructure.
+        </p>
+
+        <p class="text-lg text-[var(--color-text-secondary)] mb-6">
+          My journey spans from earning <strong class="text-[var(--color-text-primary)]">3 Gold Medals at IIT Gandhinagar</strong>
+          to completing my M.S. in Robotic Systems Development at <strong class="text-[var(--color-text-primary)]">Carnegie Mellon's Robotics Institute</strong>,
+          where I deployed assistive robots to senior living facilities.
+        </p>
+
+        <p class="text-lg text-[var(--color-text-secondary)] mb-8">
+          Currently building <strong class="text-[var(--color-text-primary)]">Aurum</strong> - a privacy-first personal finance AI.
+          I believe in shipping fast, iterating faster, and making technology that actually helps people.
+        </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {stats.map((stat, index) => (
+            <DiffusionCard particleCount={30}>
+              <div class="text-center">
+                <div class="stat-value">{stat.value}</div>
+                <div class="stat-label">{stat.label}</div>
+              </div>
+            </DiffusionCard>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
