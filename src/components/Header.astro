@@ -1,47 +1,43 @@
 ---
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Ventures', href: '#ventures' },
-  { label: 'Research', href: '#publications' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Awards', href: '#awards' },
-  { label: 'Writing', href: '#writing' },
+  { label: 'Builder', href: '/engineer' },
+  { label: 'Explorer', href: '/explorer' },
+  { label: 'Artist', href: '/artist' },
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-[var(--color-bg-primary)]/80 backdrop-blur-md border-b border-[var(--color-border)]">
-  <nav class="container flex items-center justify-between h-16">
-    <a href="/" class="text-xl font-bold gradient-text">PV</a>
-
+<header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 header-pill">
+  <nav class="flex items-center justify-center h-12 px-4">
     <!-- Desktop Navigation -->
     <div class="hidden md:flex items-center gap-6">
-      {navLinks.map(link => (
+      <div class="nav-tabs" role="tablist" aria-label="Primary">
         <a
-          href={link.href}
-          class="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+          href="/"
+          class:list={[
+            'nav-tab',
+            currentPath === '/' && 'active',
+          ]}
         >
-          {link.label}
+          Home
         </a>
-      ))}
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class:list={[
+              'nav-tab',
+              currentPath === link.href && 'active',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
     </div>
 
     <!-- Theme Toggle & Mobile Menu -->
-    <div class="flex items-center gap-4">
-      <button
-        id="theme-toggle"
-        class="p-2 rounded-lg bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors"
-        aria-label="Toggle theme"
-      >
-        <svg class="w-5 h-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        <svg class="w-5 h-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      </button>
-
-      <!-- Mobile Menu Toggle -->
+    <div class="flex items-center gap-4 md:absolute md:right-4">
       <button
         id="mobile-menu-toggle"
         class="md:hidden p-2 rounded-lg bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-tertiary)] transition-colors"
@@ -54,8 +50,7 @@ const navLinks = [
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu md:hidden">
+  <div id="mobile-menu" class="fixed inset-0 z-40 bg-[var(--color-bg-primary)]/75 backdrop-blur-xl hidden md:hidden">
     <div class="container pt-20 pb-6">
       <button
         id="mobile-menu-close"
@@ -80,31 +75,67 @@ const navLinks = [
   </div>
 </header>
 
-<script>
-  // Theme Toggle
-  const themeToggle = document.getElementById('theme-toggle');
-  themeToggle?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
+<style>
+  .header-pill {
+    background: rgba(10, 10, 16, 0.7);
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+    border-radius: 999px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 14px 30px -22px rgba(0, 0, 0, 0.7);
+  }
 
+  .nav-tabs {
+    display: inline-flex;
+    gap: 0.5rem;
+    padding: 0.35rem;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .nav-tab {
+    border: none;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .nav-tab:hover {
+    color: var(--color-text-primary);
+  }
+
+  .nav-tab.active {
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.08);
+  }
+</style>
+
+<script>
   // Mobile Menu
   const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
   const mobileMenuClose = document.getElementById('mobile-menu-close');
   const mobileMenu = document.getElementById('mobile-menu');
 
   mobileMenuToggle?.addEventListener('click', () => {
-    mobileMenu?.classList.add('open');
+    mobileMenu?.classList.remove('hidden');
   });
 
   mobileMenuClose?.addEventListener('click', () => {
-    mobileMenu?.classList.remove('open');
+    mobileMenu?.classList.add('hidden');
   });
 
-  // Close mobile menu when clicking a link
   document.querySelectorAll('.mobile-nav-link').forEach(link => {
     link.addEventListener('click', () => {
-      mobileMenu?.classList.remove('open');
+      mobileMenu?.classList.add('hidden');
     });
   });
 </script>

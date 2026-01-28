@@ -1,0 +1,199 @@
+---
+/**
+ * Sidebar navigation showing current section with dots/labels.
+ * Auto-discovers sections and syncs with scroll position.
+ */
+---
+
+<nav class="section-nav" id="section-nav" aria-label="Section navigation">
+  <div class="section-nav-inner">
+    <!-- Dots will be populated by JS -->
+  </div>
+</nav>
+
+<style>
+  .section-nav {
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: none;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+  }
+
+  .section-nav:hover {
+    opacity: 1;
+  }
+
+  .section-nav.active {
+    display: block;
+  }
+
+  .section-nav-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    padding: 0.4rem 0.35rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-bg-secondary) 70%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  }
+
+  .section-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0.3rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: transparent;
+  }
+
+  .section-nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .section-nav-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-text-muted);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    transform: translateX(6px);
+    pointer-events: none;
+  }
+
+  .section-nav-item:hover .section-nav-dot {
+    background: var(--color-text-secondary);
+    transform: scale(1.35);
+  }
+
+  .section-nav:hover .section-nav-label,
+  .section-nav-item.active .section-nav-label {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .section-nav-item.active .section-nav-dot {
+    background: var(--mode-color);
+    transform: scale(1.6);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--mode-color) 75%, transparent);
+  }
+
+  .section-nav-item.active {
+    border-color: color-mix(in srgb, var(--mode-color) 40%, transparent);
+    background: color-mix(in srgb, var(--mode-color) 12%, transparent);
+  }
+
+  .section-nav-item.active .section-nav-label {
+    color: var(--mode-color);
+  }
+
+  @media (max-width: 1024px) {
+    .section-nav {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('section-nav');
+  const navInner = nav?.querySelector('.section-nav-inner');
+
+  if (nav && navInner) {
+    // Discover sections
+    const sectionElements = document.querySelectorAll('section[id]');
+    const sections = Array.from(sectionElements).map(el => ({
+      id: el.id,
+      label: el.getAttribute('data-nav-label')
+        || el.querySelector('h1, h2, .section-eyebrow')?.textContent?.trim()
+        || el.id,
+    }));
+
+    if (sections.length > 1) {
+      // Show nav
+      nav.classList.add('active');
+
+      // Create dots
+      sections.forEach((section, index) => {
+        const item = document.createElement('button');
+        item.className = 'section-nav-item';
+        item.setAttribute('data-index', String(index));
+        item.setAttribute('aria-label', `Go to ${section.label}`);
+
+        const label = document.createElement('span');
+        label.className = 'section-nav-label';
+        label.textContent = section.label;
+
+        const dot = document.createElement('span');
+        dot.className = 'section-nav-dot';
+
+        item.appendChild(dot);
+        item.appendChild(label);
+        navInner.appendChild(item);
+
+        // Click to navigate
+        item.addEventListener('click', () => {
+          const el = document.getElementById(section.id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+          // Also trigger the global goToSection if available
+          if ((window as any).goToSection) {
+            (window as any).goToSection(index);
+          }
+        });
+      });
+
+      // Track current section
+      let currentIndex = 0;
+      const updateActive = () => {
+        const items = navInner.querySelectorAll('.section-nav-item');
+        items.forEach((item, i) => {
+          item.classList.toggle('active', i === currentIndex);
+        });
+      };
+
+      // Update on scroll
+      const observerCallback = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            const index = sections.findIndex(s => s.id === id);
+            if (index !== -1) {
+              currentIndex = index;
+              updateActive();
+            }
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(observerCallback, {
+        threshold: 0.5,
+        rootMargin: '-10% 0px -10% 0px',
+      });
+
+      sectionElements.forEach(el => observer.observe(el));
+
+      // Initial state
+      updateActive();
+    }
+  }
+</script>

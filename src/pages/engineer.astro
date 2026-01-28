@@ -1,0 +1,488 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    category: 'Production Systems',
+    items: [
+      {
+        title: 'Digital Surveyor - HD Mapping',
+        description: 'Sub-centimeter 3D HD mapping system fusing multi-view imagery and LiDAR. Deployed across 20,000+ miles of city infrastructure for 20+ enterprise customers.',
+        image: null,
+        tags: ['PyTorch', 'Transformers', 'Point Clouds', 'Production ML'],
+        highlights: ['$3M+ ARR impact', 'Extended MapTR 2D→3D', '30%+ performance gains'],
+      },
+      {
+        title: 'Self-Supervised Camera-LiDAR Calibration',
+        description: 'Novel learning-to-optimize architecture for automatic sensor calibration. Distributed deployment delivering calibration as invisible infrastructure.',
+        image: null,
+        tags: ['Self-Supervised', 'Optimization', 'CUDA', 'Distributed'],
+        highlights: ['<0.2° rotation error', '±0.03cm translation', 'Revenue unblocked'],
+      },
+    ],
+  },
+  {
+    category: 'Robotics & Autonomy',
+    items: [
+      {
+        title: 'Alfred - Zero-Shot Generalist Robot',
+        description: 'Autonomous assistive robot for elderly care deployed at Vitalia senior living facility. First LLM-powered robot in a real facility.',
+        image: '/images/alfred_team.jpeg',
+        tags: ['ROS', 'PyTorch', 'LLMs', 'MoveIt'],
+        link: 'https://mrsdprojects.ri.cmu.edu/2023teamf/',
+        highlights: ['Featured in CMU SCS News', 'Real-world deployment', 'GPT-3.5 integration'],
+      },
+      {
+        title: 'Deep RL Quadruped Locomotion',
+        description: 'End-to-end reinforcement learning for robust quadruped locomotion using PPO and domain randomization in Isaac Gym.',
+        image: '/images/quad.gif',
+        tags: ['PyTorch', 'Isaac Gym', 'PPO', 'Sim2Real'],
+        highlights: ['Domain randomization', 'Robust gaits', 'Real hardware transfer'],
+      },
+      {
+        title: 'Learning by Cheating - Drone Navigation',
+        description: 'Zero-shot sim2real transfer for autonomous drone racing using privileged learning.',
+        image: '/images/cheating.gif',
+        tags: ['Sim2Real', 'Imitation Learning', 'Drones'],
+        link: 'https://arxiv.org/abs/2111.06056',
+        highlights: ['Zero-shot transfer', 'AirSim simulation', 'End-to-end control'],
+      },
+      {
+        title: 'eYantra Robotics Competition',
+        description: 'National robotics competition - built autonomous warehouse robot with computer vision and path planning.',
+        image: '/images/eyantra.gif',
+        tags: ['ROS', 'OpenCV', 'Embedded', 'Path Planning'],
+        highlights: ['National finalist', 'Real-time CV', 'Custom hardware'],
+      },
+    ],
+  },
+  {
+    category: 'Computer Vision & 3D',
+    items: [
+      {
+        title: 'Memory Guided Road Segmentation',
+        description: 'Temporal memory module for consistent road segmentation across video frames. Published at ICIAP 2021.',
+        image: '/images/memseg.gif',
+        tags: ['Segmentation', 'Video', 'PyTorch', 'LSTM'],
+        highlights: ['ICIAP 2021', 'Springer LNCS', 'Temporal consistency'],
+      },
+      {
+        title: 'Single View Plant Modelling',
+        description: 'Two-stage perception framework coupling UNet with coordinate-descent optimizer for 3D plant reconstruction from single images.',
+        image: '/images/iterations_plants.png',
+        tags: ['3D Reconstruction', 'UNet', 'Optimization'],
+        highlights: ['MITACS Globalink', 'Deformable structures', 'Single-view 3D'],
+      },
+      {
+        title: 'Panorama Stitching',
+        description: 'Multi-image panorama creation with homography estimation and blending.',
+        image: '/images/panorama.png',
+        tags: ['OpenCV', 'Homography', 'Image Processing'],
+      },
+      {
+        title: 'EigenFace Recognition',
+        description: 'PCA-based face recognition system implementation.',
+        image: '/images/eigenface.png',
+        tags: ['PCA', 'Face Recognition', 'Classical ML'],
+      },
+      {
+        title: 'Block Matching Stereo',
+        description: 'Stereo depth estimation using block matching algorithms.',
+        image: '/images/blockmatching.png',
+        tags: ['Stereo Vision', 'Depth Estimation', 'C++'],
+      },
+    ],
+  },
+  {
+    category: 'Path Planning & Multi-Robot',
+    items: [
+      {
+        title: 'FF-RRT* - Flexible Formation Path Planning',
+        description: 'Novel sampling-based planner for multi-robot flexible formation path planning. Published in ASME Journal of Mechanisms and Robotics.',
+        image: '/images/ffrrt.gif',
+        tags: ['Path Planning', 'Multi-Robot', 'Sampling-Based'],
+        link: 'https://doi.org/10.1115/1.4064502',
+        highlights: ['ASME JMR 2024', 'Flexible formations', 'Theoretical guarantees'],
+      },
+      {
+        title: 'PD* Lite - Multi-Agent Path Finding',
+        description: 'Real-time multi-agent path planning with prioritized planning and deadlock resolution.',
+        image: '/images/rrtstar.gif',
+        tags: ['MAPF', 'Real-Time', 'Multi-Agent'],
+        link: 'https://arxiv.org/abs/2111.06056',
+        highlights: ['arXiv preprint', 'Scalable', 'Deadlock-free'],
+      },
+      {
+        title: 'Racing Line Optimization',
+        description: 'Optimal racing line computation for autonomous racing vehicles.',
+        image: '/images/raceline.png',
+        tags: ['Optimization', 'Racing', 'Trajectory Planning'],
+      },
+      {
+        title: 'Fast RaceCAR',
+        description: 'Real-time autonomous racing through representation learning and end-to-end control.',
+        image: '/images/car_1.png',
+        tags: ['Deep Learning', 'Racing', 'End-to-End'],
+        link: 'https://arxiv.org/abs/2111.15343',
+      },
+    ],
+  },
+  {
+    category: 'Applications & Tools',
+    items: [
+      {
+        title: 'Amalthea App',
+        description: 'Event management app for IIT Gandhinagar tech fest with 1500+ downloads.',
+        image: '/images/aml_app_a.png',
+        tags: ['Flutter', 'Firebase', 'Mobile'],
+        highlights: ['1500+ downloads', 'Real-time updates', 'QR check-in'],
+      },
+      {
+        title: 'InsIIT - Campus App',
+        description: 'Comprehensive campus app for IIT Gandhinagar students with maps, schedules, and resources.',
+        image: '/images/insiit_1.png',
+        tags: ['Flutter', 'Firebase', 'Mobile'],
+      },
+      {
+        title: 'Library Management System',
+        description: 'Full-stack library management system for IIT Gandhinagar.',
+        image: '/images/lib_1.png',
+        tags: ['React', 'Node.js', 'MongoDB'],
+      },
+      {
+        title: 'NNViz',
+        description: 'Neural network architecture visualization tool for educational purposes.',
+        image: '/images/nnviz.gif',
+        tags: ['Visualization', 'Education', 'JavaScript'],
+      },
+      {
+        title: 'RenderLib',
+        description: 'Custom software rendering library implementing rasterization pipeline from scratch.',
+        image: '/images/renderLibrary.gif',
+        tags: ['Graphics', 'C++', 'Rendering'],
+      },
+    ],
+  },
+  {
+    category: 'Hardware & Embedded',
+    items: [
+      {
+        title: 'Smart Crutch',
+        description: 'IoT-enabled smart crutch for rehabilitation monitoring with gait analysis.',
+        image: '/images/crutch_vid.gif',
+        tags: ['IoT', 'Embedded', 'Healthcare'],
+      },
+      {
+        title: 'FoodBuddy',
+        description: 'Voice-assisted dining device for people with disabilities. Provisional patent filed.',
+        image: '/images/food.png',
+        tags: ['Assistive Tech', 'Voice', 'Patent'],
+        highlights: ['Provisional Patent', 'US & India'],
+      },
+      {
+        title: 'Hydrobike',
+        description: 'Human-powered hydrofoil watercraft design and control system.',
+        image: '/images/hydrobike.gif',
+        tags: ['Mechanical', 'Controls', 'Design'],
+      },
+      {
+        title: 'Custom PCB Design',
+        description: 'Various custom PCB designs for robotics and IoT projects.',
+        image: '/images/custompcb.jpg',
+        tags: ['PCB', 'Electronics', 'KiCad'],
+      },
+      {
+        title: 'Presentation Pointer',
+        description: 'Gesture-controlled wireless presentation pointer using IMU.',
+        image: '/images/presentationpointer.png',
+        tags: ['IMU', 'Gesture', 'Wireless'],
+      },
+    ],
+  },
+];
+
+const allProjects = projects.flatMap((category) =>
+  category.items.map((item) => ({
+    ...item,
+    category: category.category,
+  })),
+);
+
+const latestProjects = allProjects.slice(0, 10);
+
+const clusterCenters = [
+  { category: 'Production Systems', x: 22, y: 28, size: 140 },
+  { category: 'Robotics & Autonomy', x: 70, y: 22, size: 160 },
+  { category: 'Computer Vision & 3D', x: 62, y: 68, size: 150 },
+  { category: 'Path Planning & Multi-Robot', x: 32, y: 72, size: 150 },
+  { category: 'Applications & Tools', x: 82, y: 58, size: 130 },
+  { category: 'Hardware & Embedded', x: 18, y: 55, size: 140 },
+];
+---
+
+<Layout
+  title="Builder | Praveen Venkatesh"
+  description="Production perception systems, mapping, and ML infrastructure."
+  mode="engineer"
+>
+  <section class="builder-page">
+    <div class="builder-grid">
+      <div class="builder-left">
+        <div class="builder-left-header">
+          <span class="section-eyebrow">Builder</span>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">Production Perception Systems</h1>
+          <p class="text-lg text-[var(--color-text-secondary)] mb-6">
+            I build multi-modal mapping pipelines, calibration services, and ML infrastructure that ships to customers.
+            From research prototypes to production systems deployed at scale.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <span class="tech-badge">PyTorch</span>
+            <span class="tech-badge">CUDA</span>
+            <span class="tech-badge">ROS2</span>
+            <span class="tech-badge">Point Clouds</span>
+            <span class="tech-badge">Transformers</span>
+            <span class="tech-badge">Docker</span>
+            <span class="tech-badge">C++</span>
+          </div>
+        </div>
+
+        <div class="builder-projects" aria-label="Latest projects">
+          {latestProjects.map((project) => (
+            <article class="builder-project-card">
+              <div class="builder-project-meta">
+                <span class="builder-project-category">{project.category}</span>
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" class="builder-project-link">
+                    Link
+                  </a>
+                )}
+              </div>
+              <h3 class="builder-project-title">{project.title}</h3>
+              <p class="builder-project-desc">{project.description}</p>
+              <div class="builder-project-tags">
+                {project.tags.map((tag) => (
+                  <span class="tech-badge text-xs">{tag}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="builder-right">
+        <div class="embedding-header">
+          <span class="section-eyebrow">Latent Space</span>
+          <p class="embedding-subtitle">Hover over clusters to reveal projects from the idea space.</p>
+        </div>
+        <div class="embedding-space" id="embedding-space" aria-label="Project latent embedding space">
+          <div class="embedding-cards" id="embedding-cards"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .builder-page {
+    padding: 6rem 0 4rem;
+  }
+
+  .builder-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 420px) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .builder-left {
+    position: sticky;
+    top: 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-width: 0;
+    max-height: calc(100vh - 8rem);
+  }
+
+  .builder-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+
+  .builder-project-card {
+    background: color-mix(in srgb, var(--color-bg-secondary) 55%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+    border-radius: 1rem;
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .builder-project-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--mode-color) 65%, transparent);
+  }
+
+  .builder-project-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .builder-project-category {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-text-muted);
+  }
+
+  .builder-project-link {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--mode-color);
+  }
+
+  .builder-project-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .builder-project-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+  }
+
+  .builder-project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .builder-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+  }
+
+  .embedding-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .embedding-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
+  .embedding-space {
+    position: relative;
+    height: min(70vh, 640px);
+    border-radius: 1.5rem;
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+    background: radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.12), transparent 45%),
+      radial-gradient(circle at 80% 30%, rgba(167, 139, 250, 0.12), transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.08), transparent 55%);
+    overflow: hidden;
+    cursor: crosshair;
+  }
+
+  .embedding-cards {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  :global(.embedding-card) {
+    position: absolute;
+    width: 220px;
+    padding: 0.75rem 0.9rem;
+    border-radius: 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+    background: rgba(10, 10, 16, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.65);
+    transform: translate(-50%, -50%) scale(var(--depth-scale, 1));
+    transition: box-shadow 0.2s ease;
+    pointer-events: auto;
+    will-change: transform;
+  }
+
+  :global(.embedding-card:hover) {
+    transform: translate(-50%, -50%) scale(calc(var(--depth-scale, 1) * 1.08));
+    box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.75);
+  }
+
+  :global(.embedding-card-meta) {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  :global(.embedding-card-title) {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  :global(.embedding-card-tags) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  :global(.embedding-tag) {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 1024px) {
+    .builder-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .builder-left {
+      position: static;
+      max-height: none;
+    }
+
+    .builder-projects {
+      max-height: 340px;
+    }
+
+    .embedding-space {
+      height: 420px;
+    }
+  }
+</style>
+
+<script type="application/json" id="embedding-data" set:html={JSON.stringify(allProjects)}></script>
+<script type="application/json" id="embedding-clusters" set:html={JSON.stringify(clusterCenters)}></script>
+<script type="module" src="/src/scripts/embedding-space.ts"></script>

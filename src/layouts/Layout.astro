@@ -1,15 +1,18 @@
 ---
 import '../styles/global.css';
 import DiffusionCanvas from '../components/DiffusionCanvas.astro';
+import Header from '../components/Header.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  mode?: string;
 }
 
 const {
   title = 'Praveen Venkatesh',
-  description = 'Perception Engineer, Researcher, and Founder. Building the future of robotics and AI.'
+  description = 'Perception Engineer, Researcher, and Founder. Building the future of robotics and AI.',
+  mode = 'home',
 } = Astro.props;
 ---
 
@@ -60,11 +63,12 @@ const {
       }
     </script>
   </head>
-  <body class="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" data-mode="home">
-    <DiffusionCanvas />
+  <body class="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" data-mode={mode}>
+    {mode !== 'engineer' && <DiffusionCanvas />}
     <div class="ambient-glow" aria-hidden="true"></div>
     <div class="noise-overlay" aria-hidden="true"></div>
 
+    <Header />
     <main>
       <slot />
     </main>

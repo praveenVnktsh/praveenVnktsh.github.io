@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Legacy | Praveen Venkatesh"
+  description="Earlier work and personal notes from praveenvnktsh.github.io."
+  mode="home"
+>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Legacy</span>
+        <h1 class="section-title">Praveen Venkatesh</h1>
+        <p class="section-subtitle">
+          Hello World! I am a graduate student at Carnegie Mellon University, Robotics Institute.
+        </p>
+      </div>
+
+      <div class="legacy-intro">
+        <ul class="legacy-list">
+          <li>Passionate about giving sight to robots.</li>
+          <li>Currently building robotic systems that can assist humans.</li>
+          <li>Love tinkering with robots and experimenting with crazy ideas.</li>
+          <li>Absolutely love teaching and disseminating knowledge in intuitive ways.</li>
+          <li>Triple Gold Medallist from IIT Gandhinagar.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-[var(--color-bg-secondary)]">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Works</span>
+        <h2 class="section-title">My Works</h2>
+        <p class="section-subtitle">Some uber cool things I've done in the past.</p>
+      </div>
+
+      <div class="role-grid">
+        <div class="role-card">
+          <h3>Alfred</h3>
+          <p>Robots for the elderly.</p>
+        </div>
+        <div class="role-card">
+          <h3>Experimenting with RL</h3>
+          <p>PPO + A2C | Genetic Evolution.</p>
+        </div>
+        <div class="role-card">
+          <h3>FFRRT*</h3>
+          <p>Flexible Formation Rapidly exploring Random Trees.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Personal</span>
+        <h2 class="section-title">Some Things About Me</h2>
+      </div>
+
+      <ul class="legacy-list">
+        <li>I can solve the 3x3 cube in around 13 seconds and solve 14 twisty puzzles.</li>
+        <li>I go on typeracer and type at 100 WPM when I feel like it.</li>
+        <li>Music = ❤️</li>
+        <li>Competitive table tennis player (ex-state player from TN).</li>
+        <li>I can play the keyboard.</li>
+        <li>I play a lot of games (gamerTag: flyingMango).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section bg-[var(--color-bg-secondary)]">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Memories</span>
+        <h2 class="section-title">Snapshots</h2>
+      </div>
+
+      <div class="legacy-gallery">
+        <figure>
+          <img src="/images/medals.JPG" alt="Convocation medals" loading="lazy" />
+          <figcaption>Convocation | Receiving medals</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/deanslist.jpg" alt="Dean's list recognition" loading="lazy" />
+          <figcaption>Receiving Dean's List</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/invent.jpg" alt="Invent at IITGN" loading="lazy" />
+          <figcaption>Invent@IITGN 2019</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/interiit_1.jpg" alt="Inter IIT team" loading="lazy" />
+          <figcaption>Inter IIT team</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/latex.jpg" alt="Team LaTeX" loading="lazy" />
+          <figcaption>Team LaTeX 2018</figcaption>
+        </figure>
+        <figure>
+          <img src="/images/iitl.jpg" alt="IIT Gandhinagar campus" loading="lazy" />
+          <figcaption>IIT Gandhinagar</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legacy-intro {
+    max-width: 720px;
+  }
+
+  .legacy-list {
+    list-style: disc;
+    padding-left: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .legacy-list li + li {
+    margin-top: 0.6rem;
+  }
+
+  .legacy-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .legacy-gallery figure {
+    margin: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .legacy-gallery img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .legacy-gallery figcaption {
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+</style>

@@ -158,11 +158,8 @@ export class PointCloudController {
       this.currentPositions[i3 + 1] = (Math.random() - 0.5) * 6;
       this.currentPositions[i3 + 2] = (Math.random() - 0.5) * 2;
 
-      // Initialize wandering: some particles start wandering
-      this.isWandering[i] = Math.random() < this.WANDER_FRACTION ? 1 : 0;
-      this.wanderTargets[i3] = (Math.random() - 0.5) * 20;
-      this.wanderTargets[i3 + 1] = (Math.random() - 0.5) * 12;
-      this.wanderTargets[i3 + 2] = (Math.random() - 0.5) * 2;
+      // All particles target the shape (no wandering)
+      this.isWandering[i] = 0;
 
       // Random initial velocities for orbital motion
       this.velocities[i3] = (Math.random() - 0.5) * 0.02;
@@ -433,71 +430,34 @@ export class PointCloudController {
     const { breathingAmplitude, breathingSpeed } = this.currentStyle;
 
     // Physics constants
-    const K = 0.0015;           // Force strength (1/sqrt(r))
-    const K_WANDER = 0.002;     // Force for wanderers chasing their drift target
+    const K = 0.0012;           // Force strength (1/sqrt(r)) - gentle pull
     const DAMPING_FAR = 0.98;   // Low damping when far (fast travel)
-    const DAMPING_NEAR = 0.90;  // High damping when close (kill oscillations)
+    const DAMPING_NEAR = 0.92;  // High damping when close (kill oscillations)
     const DAMPING_DIST = 1.0;   // Distance threshold for damping transition
-    const ATTRACT_RANGE = 4.0;  // Only attract particles within this distance
     const MIN_DIST = 0.02;      // Prevent division by zero
-    const MAX_FORCE = 0.02;     // Cap force to prevent snapping
-    const NOISE = 0.0005;       // Brownian noise strength (keeps particles alive)
-    const WANDER_DRIFT = 0.08;  // How fast wander targets drift across screen
-    const EJECT_CHANCE = 0.001;   // Chance per frame to eject a settled particle
-    const EJECT_VELOCITY = 0.4;   // Velocity kick to escape attraction field
+    const MAX_FORCE = 0.03;     // Cap force to prevent snapping
+    const NOISE = 0.003;        // Brownian noise strength (keeps particles alive)
+    const RANDOM_EJECT_CHANCE = 0.001;  // Chance per frame for random ejection
+    const RANDOM_EJECT_SPEED = 0.1;     // How fast random ejections fly
 
     for (let i = 0; i < this.pointCount; i++) {
       const i3 = i * 3;
       const phase = this.phaseOffsets[i];
 
-      // Randomly eject settled particles with high velocity
-      if (!this.isWandering[i] && Math.random() < EJECT_CHANCE) {
-        // Random direction ejection
+      // Random ejection - particles spontaneously fly off
+      if (Math.random() < RANDOM_EJECT_CHANCE) {
         const angle = Math.random() * Math.PI * 2;
         const elevation = (Math.random() - 0.5) * Math.PI;
-        this.velocities[i3] += Math.cos(angle) * Math.cos(elevation) * EJECT_VELOCITY;
-        this.velocities[i3 + 1] += Math.sin(elevation) * EJECT_VELOCITY;
-        this.velocities[i3 + 2] += Math.sin(angle) * Math.cos(elevation) * EJECT_VELOCITY * 0.5;
+        this.velocities[i3] += Math.cos(angle) * Math.cos(elevation) * RANDOM_EJECT_SPEED;
+        this.velocities[i3 + 1] += Math.sin(elevation) * RANDOM_EJECT_SPEED;
+        this.velocities[i3 + 2] += Math.sin(angle) * Math.cos(elevation) * RANDOM_EJECT_SPEED * 0.5;
       }
 
-      // Drift wander targets across screen
-      if (this.isWandering[i]) {
-        this.wanderTargets[i3] += (Math.random() - 0.5) * WANDER_DRIFT;
-        this.wanderTargets[i3 + 1] += (Math.random() - 0.5) * WANDER_DRIFT;
-        this.wanderTargets[i3 + 2] += (Math.random() - 0.5) * WANDER_DRIFT * 0.3;
-        // Wrap around screen edges for continuous flow
-        if (this.wanderTargets[i3] < -10) this.wanderTargets[i3] = 10;
-        if (this.wanderTargets[i3] > 10) this.wanderTargets[i3] = -10;
-        if (this.wanderTargets[i3 + 1] < -6) this.wanderTargets[i3 + 1] = 6;
-        if (this.wanderTargets[i3 + 1] > 6) this.wanderTargets[i3 + 1] = -6;
-      }
-
-      // Check distance to shape target
-      const shapeX = this.targetPositions[i3];
-      const shapeY = this.targetPositions[i3 + 1];
-      const shapeZ = this.targetPositions[i3 + 2];
-      const dxShape = shapeX - this.currentPositions[i3];
-      const dyShape = shapeY - this.currentPositions[i3 + 1];
-      const dzShape = shapeZ - this.currentPositions[i3 + 2];
-      const distToShape = Math.sqrt(dxShape * dxShape + dyShape * dyShape + dzShape * dzShape);
-
-      // If outside attraction range, become a wanderer
-      if (distToShape > ATTRACT_RANGE && !this.isWandering[i]) {
-        this.isWandering[i] = 1;
-        this.wanderTargets[i3] = (Math.random() - 0.5) * 20;
-        this.wanderTargets[i3 + 1] = (Math.random() - 0.5) * 12;
-        this.wanderTargets[i3 + 2] = (Math.random() - 0.5) * 2;
-      }
-      // If inside attraction range and wandering, get captured
-      if (distToShape < ATTRACT_RANGE && this.isWandering[i]) {
-        this.isWandering[i] = 0;
-      }
-
-      // Choose target based on wandering state
-      const targetX = this.isWandering[i] ? this.wanderTargets[i3] : shapeX;
-      const targetY = this.isWandering[i] ? this.wanderTargets[i3 + 1] : shapeY;
-      const targetZ = this.isWandering[i] ? this.wanderTargets[i3 + 2] : shapeZ;
-      const forceStrength = this.isWandering[i] ? K_WANDER : K;
+      // Target is always the shape - particles will return
+      const targetX = this.targetPositions[i3];
+      const targetY = this.targetPositions[i3 + 1];
+      const targetZ = this.targetPositions[i3 + 2];
+      const forceStrength = K;
 
       // Distance to current target (shape or wander)
       const dx = targetX - this.currentPositions[i3];
@@ -552,12 +512,12 @@ export class PointCloudController {
   }
 
   /**
-   * Soft sphere bulge effect: points near mouse gently displace outward.
+   * Eject effect: points near mouse get launched away with velocity impulse.
    */
   private applyRepelEffect(): void {
-    const BULGE_RADIUS = 0.5;     // Radius of influence
-    const BULGE_STRENGTH = 0.008; // Very subtle displacement
-    const DECAY = 0.96;           // Slow, smooth return
+    const EJECT_RADIUS = 0.8;       // Radius of influence (larger = more particles)
+    const EJECT_STRENGTH = 0.18;     // Strong velocity impulse
+    const OFFSET_DECAY = 0.92;      // Decay for visual offset
 
     // Update raycaster with current mouse position
     this.mouseRay.setFromCamera(this.mouseNDC, this.camera);
@@ -569,7 +529,7 @@ export class PointCloudController {
     const invMatrix = worldMatrix.clone().invert();
     const tempPoint = new THREE.Vector3();
     const closestOnRay = new THREE.Vector3();
-    const bulgeDir = new THREE.Vector3();
+    const ejectDir = new THREE.Vector3();
 
     for (let i = 0; i < this.pointCount; i++) {
       const i3 = i * 3;
@@ -589,33 +549,39 @@ export class PointCloudController {
       // Distance from point to ray
       const dist = tempPoint.distanceTo(closestOnRay);
 
-      // Apply smooth bulge if within radius
-      if (dist < BULGE_RADIUS) {
-        // Smooth falloff: (1 - (d/r)^2)^2 gives nice sphere-like bulge
-        const normalizedDist = dist / BULGE_RADIUS;
-        const falloff = Math.pow(1 - normalizedDist * normalizedDist, 2);
+      // Apply eject impulse if within radius
+      if (dist < EJECT_RADIUS) {
+        // Inverse falloff: stronger when closer
+        const normalizedDist = dist / EJECT_RADIUS;
+        const falloff = Math.pow(1 - normalizedDist, 2);
 
-        // Bulge direction (away from ray center)
+        // Eject direction (away from ray center)
         if (dist > 0.001) {
-          bulgeDir.subVectors(tempPoint, closestOnRay).normalize();
+          ejectDir.subVectors(tempPoint, closestOnRay).normalize();
         } else {
           // If exactly on ray, push outward randomly
-          bulgeDir.set(Math.random() - 0.5, Math.random() - 0.5, 0).normalize();
+          ejectDir.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.3).normalize();
         }
 
         // Transform direction back to local space
-        bulgeDir.transformDirection(invMatrix);
+        ejectDir.transformDirection(invMatrix);
 
-        const strength = BULGE_STRENGTH * falloff;
-        this.repelOffsets[i3] += bulgeDir.x * strength;
-        this.repelOffsets[i3 + 1] += bulgeDir.y * strength;
-        this.repelOffsets[i3 + 2] += bulgeDir.z * strength;
+        // Apply velocity impulse (not just offset)
+        const impulse = EJECT_STRENGTH * falloff;
+        this.velocities[i3] += ejectDir.x * impulse;
+        this.velocities[i3 + 1] += ejectDir.y * impulse;
+        this.velocities[i3 + 2] += ejectDir.z * impulse * 0.5;
+
+        // Small visual offset for immediate feedback
+        this.repelOffsets[i3] += ejectDir.x * impulse * 0.3;
+        this.repelOffsets[i3 + 1] += ejectDir.y * impulse * 0.3;
+        this.repelOffsets[i3 + 2] += ejectDir.z * impulse * 0.2;
       }
 
-      // Smooth decay back to zero
-      this.repelOffsets[i3] *= DECAY;
-      this.repelOffsets[i3 + 1] *= DECAY;
-      this.repelOffsets[i3 + 2] *= DECAY;
+      // Decay visual offsets
+      this.repelOffsets[i3] *= OFFSET_DECAY;
+      this.repelOffsets[i3 + 1] *= OFFSET_DECAY;
+      this.repelOffsets[i3 + 2] *= OFFSET_DECAY;
     }
   }
 
@@ -709,12 +675,6 @@ export class PointCloudController {
       this.targetPositions[i3] = basePositions[i3] + offsetX;
       this.targetPositions[i3 + 1] = basePositions[i3 + 1] + offsetY;
       this.targetPositions[i3 + 2] = basePositions[i3 + 2];
-
-      // Only capture SOME wanderers - keep ambient noise present
-      // 70% of wanderers get captured, 30% keep wandering
-      if (this.isWandering[i] && Math.random() < 0.7) {
-        this.isWandering[i] = 0;
-      }
     }
   }
 

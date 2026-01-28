@@ -1,151 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Publications from '../components/Publications.astro';
+import Awards from '../components/Awards.astro';
+import Writing from '../components/Writing.astro';
+import Contact from '../components/Contact.astro';
 ---
 
 <Layout
-  title="Praveen Venkatesh | Perceptual Portfolio"
-  description="Perception Engineer and Robotics researcher building production ML systems and 3D mapping at Mach9."
+  title="Praveen Venkatesh"
+  description="Perception engineer building ML systems that ship."
+  mode="home"
 >
   <Hero />
-
-  <section class="section role-section cloud-right" id="engineer" data-cloud-side="right">
-    <div class="container section-split">
-      <div class="section-content">
-        <div class="section-header">
-          <span class="section-eyebrow">Engineer</span>
-          <h2 class="section-title">Production Perception Systems</h2>
-          <p class="section-subtitle">
-            I build multi-modal mapping pipelines, calibration services, and ML infrastructure that ships to customers.
-          </p>
-        </div>
-        <div class="role-grid">
-          <div class="role-card">
-            <h3>Mach9 Robotics · Perception Engineer</h3>
-            <p>Led HD mapping system development and multi-view LiDAR fusion for city-scale surveying.</p>
-            <ul>
-              <li>Sub-centimeter mapping pipeline</li>
-              <li>Cross-attention for 3D MapTR</li>
-              <li>Automated failure mining</li>
-            </ul>
-          </div>
-          <div class="role-card">
-            <h3>Self-Supervised Calibration</h3>
-            <p>Built learning-to-optimize calibration with distributed deployment for camera–LiDAR alignment.</p>
-            <ul>
-              <li>&lt;0.2° rotation error</li>
-              <li>±0.03 cm translation</li>
-              <li>Revenue unblocked via calibration</li>
-            </ul>
-          </div>
-          <div class="role-card">
-            <h3>Technical Stack</h3>
-            <p>Systems work across perception, infra, and deployment.</p>
-            <div class="tag-row">
-              <span class="tag">PyTorch</span>
-              <span class="tag">ROS2</span>
-              <span class="tag">CUDA</span>
-              <span class="tag">LiDAR</span>
-              <span class="tag">Transformers</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section role-section cloud-left" id="explorer" data-cloud-side="left">
-    <div class="container section-split">
-      <div class="section-content">
-        <div class="section-header">
-          <span class="section-eyebrow">Explorer</span>
-          <h2 class="section-title">Ventures, Research, and Field Work</h2>
-          <p class="section-subtitle">
-            From labs to startups, I build new systems and take them into the real world.
-          </p>
-        </div>
-        <div class="role-grid">
-          <div class="role-card">
-            <h3>Aurum · Founder</h3>
-            <p>Privacy-first personal finance agent with local-first learning.</p>
-            <ul>
-              <li>On-device behavior modeling</li>
-              <li>Private beta/waitlist</li>
-            </ul>
-          </div>
-          <div class="role-card">
-            <h3>Alfred Robot · CMU</h3>
-            <p>Assistive robot deployed at a senior living facility.</p>
-            <ul>
-              <li>Autonomy + LLM integration</li>
-              <li>Published in CMU SCS News</li>
-            </ul>
-          </div>
-          <div class="role-card">
-            <h3>Global Research</h3>
-            <p>MITACS Globalink at Western University, reconstructing 3D plant structures.</p>
-            <ul>
-              <li>UNet + optimizer framework</li>
-              <li>Single-view reconstruction</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section role-section cloud-right" id="artist" data-cloud-side="right">
-    <div class="container section-split">
-      <div class="section-content">
-        <div class="section-header">
-          <span class="section-eyebrow">Artist</span>
-          <h2 class="section-title">Writing, Teaching, and Craft</h2>
-          <p class="section-subtitle">
-            I translate technical depth into approachable narratives and mentor the next wave of builders.
-          </p>
-        </div>
-        <div class="role-grid">
-          <div class="role-card">
-            <h3>Technical Writing</h3>
-            <p>Medium blog with 41K+ readers across robotics and graduate admissions.</p>
-            <ul>
-              <li>SoP guide · 23K views</li>
-              <li>MITACS guide · 11.7K views</li>
-              <li>GRE guide · 5.2K views</li>
-            </ul>
-          </div>
-          <div class="role-card">
-            <h3>Teaching & Mentorship</h3>
-            <p>Teaching assistantships and peer mentorship at CMU and IIT Gandhinagar.</p>
-            <ul>
-              <li>MRSD project course TA</li>
-              <li>NLP graduate course TA</li>
-              <li>Peer learning fellow</li>
-            </ul>
-          </div>
-          <div class="role-card">
-            <h3>Leadership & Service</h3>
-            <p>Building communities through editing, event leadership, and sports.</p>
-            <ul>
-              <li>Chief Editor, Torque magazine</li>
-              <li>Conclave Coordinator</li>
-              <li>Table Tennis Secretary</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section contact-section" id="contact">
-    <div class="container contact-card">
-      <h2>Let’s build something perceptive.</h2>
-      <p>praveenvnktsh@cmu.edu · Pittsburgh, PA</p>
-      <div class="contact-links">
-        <a href="https://github.com/praveenVnktsh" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://linkedin.com/in/praveenvnktsh" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://praveenvnktsh.github.io" target="_blank" rel="noopener noreferrer">Website</a>
-      </div>
-    </div>
-  </section>
+  <About />
+  <Experience />
+  <Projects />
+  <Publications />
+  <Awards />
+  <Writing />
+  <Contact />
 </Layout>
